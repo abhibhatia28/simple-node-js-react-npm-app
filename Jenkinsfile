@@ -29,12 +29,12 @@ pipeline {
                 sh 'npm run lint' 
             }
         }
-        stage('Deliver') {
+        stage('Create Docker Image') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jenkins/scripts/kill.sh'
+                script {
+                  dockerImage = docker.build("abhibhatia28/my-first-react-app-image", "-f Dockerfile .")
+                }
             }
-        }
+        }        
     }
 }
