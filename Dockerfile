@@ -4,14 +4,14 @@ FROM node:13
 WORKDIR /app
 
 # Copy app
-COPY . src/app.js /app/
+COPY . .
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
 # Install dependencies
-RUN npm i
+RUN npm install
 
-EXPOSE 8080
+EXPOSE 3000
 
 CMD ["npm", "run", "start"]
