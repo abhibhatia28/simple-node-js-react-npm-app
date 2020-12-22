@@ -10,7 +10,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "tslint --project ."
+    "lint": "tslint --project .",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
