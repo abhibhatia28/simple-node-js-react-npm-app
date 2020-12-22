@@ -13,5 +13,12 @@
     "lint": "node_modules/.bin/eslint --ext js src",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "eslintConfig": {
+    "extends": "react-app",
+    "rules": {
+      "semi": 0,
+      "no-console": 0
+    }
+  }  
 }
