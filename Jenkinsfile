@@ -31,9 +31,7 @@ pipeline {
         }
         stage('Create Docker Image') {
             steps {
-                script {
-                  dockerImage = docker.build("abhibhatia28/my-first-react-app-image", "-f Dockerfile .")
-                }
+                sh 'docker build -t abhibhatia28/my-first-react-app-image . < Dockerfile' 
             }
         }        
     }
