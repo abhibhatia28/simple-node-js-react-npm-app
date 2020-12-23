@@ -1,9 +1,4 @@
 pipeline {
-  environment {
-    registry = "abhibhatia/my-first-react-app-image"
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-  }
     agent {
         docker {
             image 'node:6-alpine' 
@@ -12,6 +7,9 @@ pipeline {
     }
     environment {
         CI = 'true'
+        registry = "abhibhatia/my-first-react-app-image"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
     }
     stages {
         stage('Install dependencies') { 
@@ -34,12 +32,12 @@ pipeline {
                 sh 'npm run lint' 
             }
         }
-        stage('Building Image') { 
+        stage('Building image') {
             steps {
-                scripts {
-                    dockerImage = docker.build -t registry < Dockerfile
-                }    
-            }
-        }        
+              script {
+                dockerImage = docker.build -t registry
+              }
+            }       
+        }
     }
 }
