@@ -12,14 +12,8 @@ pipeline {
       }
     }
     stage('Install Dependencies') {
-      agent {
-        docker {
-        image 'node:6-alpine' 
-        args '-p 3000:3000' 
-        }
-      }
       steps {
-        sh 'sudo npm install'
+        sh 'npm install'
       }
     } 
     stage('Build') {
@@ -30,7 +24,7 @@ pipeline {
         }
       }
       steps {
-        sh 'sudo npm run build'
+        sh 'npm run build'
       }
     } 
     stage('lint') {
@@ -41,7 +35,7 @@ pipeline {
         }
       }
       steps {
-        sh 'sudo npm run lint' 
+        sh 'npm run lint' 
       }
     } 
     stage('Building image') {
