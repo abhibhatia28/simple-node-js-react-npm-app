@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    registry = "abhibhatia/reactapp-image-abcapstoneproject"
+    registry = "abhibhatia/my-first-react-image"
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
@@ -60,10 +60,15 @@ pipeline {
         }
       }
     }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry"
+      }
+    }
     stage('Create kube config file') {
       steps{
         withAWS(region: 'us-west-2') {
-          sh 'aws eks update-kubeconfig --name jenkinstest'
+          sh 'aws eks update-kubeconfig --name abcapstone'
         }
       }
     }
