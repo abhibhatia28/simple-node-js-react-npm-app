@@ -65,5 +65,12 @@ pipeline {
         sh "docker rmi $registry"
       }
     }
+    stage('Create kube config file') {
+      steps{
+        withAWS(region: 'us-west-2') {
+          sh 'aws eks update-kubeconfig --name abcapstone'
+        }
+      }
+    }
   }
 }
