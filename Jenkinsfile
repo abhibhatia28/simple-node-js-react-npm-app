@@ -19,7 +19,7 @@ pipeline {
         }
       }
       steps {
-        sh 'npm install'
+        sh 'sudo npm install'
       }
     } 
     stage('Build') {
@@ -30,7 +30,7 @@ pipeline {
         }
       }
       steps {
-        sh 'npm run build'
+        sh 'sudo npm run build'
       }
     } 
     stage('lint') {
@@ -41,7 +41,7 @@ pipeline {
         }
       }
       steps {
-        sh 'npm run lint' 
+        sh 'sudo npm run lint' 
       }
     } 
     stage('Building image') {
