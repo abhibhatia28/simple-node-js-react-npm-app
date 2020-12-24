@@ -9,8 +9,7 @@ pipeline {
     stage('Kubernetes cluster') {
             steps {
                 withAWS(region:'us-west-2', credentials:'aws-kubernetes') {
-                    sh '
-                    '''
+                    sh 'kubectl config view'
                 }
             }
     }
