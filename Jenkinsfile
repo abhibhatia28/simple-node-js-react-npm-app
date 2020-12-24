@@ -10,12 +10,9 @@ pipeline {
             steps {
                 withAWS(region:'us-west-2', credentials:'aws-kubernetes') {
                     sh '''
-                    if [ ! aws cloudformation describe-stacks --region us-west-2 --stack-name eksctl-EmaJarK8sCluster-cluster ] ; then
-
-                        if [ ! aws cloudformation describe-stacks --region us-west-2 --stack-name eksctl-EmaJarK8sCluster-nodegroup-standard-workers ] ; then
 
                             eksctl create cluster \
-                            --name EmaJarK8sCluster \
+                            --name abcluster \
                             --version 1.13 \
                             --nodegroup-name standard-workers \
                             --node-type t2.small \
@@ -28,9 +25,6 @@ pipeline {
                             --zones us-west-2b \
                             --zones us-west-2c \
 
-                        fi
-
-                    fi
                     '''
                 }
             }
@@ -40,7 +34,7 @@ pipeline {
             steps {
                 withAWS(region:'us-west-2', credentials:'aws-kubernetes') {
                     sh '''
-                        aws eks --region us-west-2 update-kubeconfig --name EmaJarK8sCluster
+                        aws eks --region us-west-2 update-kubeconfig --name abcluster
                     '''
                 }
             }
