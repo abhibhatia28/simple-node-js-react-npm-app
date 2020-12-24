@@ -30,7 +30,7 @@ pipeline {
         }
       }
       steps {
-        sh 'npm install'
+        sh 'npm run build'
       }
     } 
     stage('lint') {
@@ -41,7 +41,7 @@ pipeline {
         }
       }
       steps {
-        sh 'npm install' 
+        sh 'npm run lint' 
       }
     } 
     stage('Building image') {
