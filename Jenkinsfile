@@ -1,43 +1,69 @@
 pipeline {
-    agent {
+  agent any
+  environment {
+    registry = "abhibhatia/my-first-react-image"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/abhibhatia28/simple-node-js-react-npm-app.git'
+      }
+    }
+    stage('Install Dependencies') {
+      agent {
         docker {
-            image 'node:6-alpine' 
-            args '-p 3000:3000' 
+        image 'node:6-alpine' 
+        args '-p 3000:3000' 
         }
+      }
+      steps {
+        sh 'npm install'
+      }
+    } 
+    stage('Build') {
+      agent {
+        docker {
+        image 'node:6-alpine' 
+        args '-p 3000:3000' 
+        }
+      }
+      steps {
+        sh 'npm install'
+      }
+    } 
+    stage('lint') {
+      agent {
+        docker {
+        image 'node:6-alpine' 
+        args '-p 3000:3000' 
+        }
+      }
+      steps {
+        sh 'npm install' 
+      }
+    } 
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry
+        }
+      }
     }
-    environment {
-        CI = 'true'
-        registry = "abhibhatia/my-first-react-app-image"
-        registryCredential = 'dockerhub'
-        dockerImage = ''
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
     }
-    stages {
-        stage('Install dependencies') { 
-            steps {
-                sh 'npm install' 
-            }
-        }
-        stage('Build') { 
-            steps {
-                sh 'npm run build' 
-            }
-        }
-        stage('Test') { 
-            steps {
-                sh './jenkins/scripts/test.sh' 
-            }
-        }
-        stage('Lint') { 
-            steps {
-                sh 'npm run lint' 
-            }
-        }
-        stage('Building image') {
-            steps {
-              script {
-                dockerImage = docker.build registry
-              }
-            }       
-        }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry"
+      }
     }
+  }
 }
