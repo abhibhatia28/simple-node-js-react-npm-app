@@ -13,15 +13,7 @@ pipeline {
                     '''
                 }
             }
-        }
-
-        stage('Configuration file cluster') {
-            steps {
-                withAWS(region:'us-west-2', credentials:'aws-kubernetes') {
-                    sh 'kubectl config view'
-                }
-            }
-        }
+    }
   }
 }
 
