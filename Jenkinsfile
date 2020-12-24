@@ -6,69 +6,9 @@ pipeline {
     dockerImage = ''
   }
   stages {
-    stage('Cloning Git') {
-      steps {
-        git 'https://github.com/abhibhatia28/simple-node-js-react-npm-app.git'
-      }
-    }
-    stage('Install Dependencies') {
-      agent {
-        docker {
-        image 'node:6-alpine' 
-        args '-p 3000:3000' 
-        }
-      }
-      steps {
-        sh 'npm install'
-      }
-    } 
-    stage('Build') {
-      agent {
-        docker {
-        image 'node:6-alpine' 
-        args '-p 3000:3000' 
-        }
-      }
-      steps {
-        sh 'npm run build'
-      }
-    } 
-    stage('lint') {
-      agent {
-        docker {
-        image 'node:6-alpine' 
-        args '-p 3000:3000' 
-        }
-      }
-      steps {
-        sh 'npm run lint' 
-      }
-    } 
-    stage('Building image') {
+    stage('Create eksctl cluster') {
       steps{
-        script {
-          dockerImage = docker.build registry
-        }
-      }
-    }
-    stage('Deploy Image') {
-      steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
-        }
-      }
-    }
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $registry"
-      }
-    }
-    stage('Create kube config file') {
-      steps{
-        withAWS(region: 'us-west-2') {
-          sh 'aws eks update-kubeconfig --name abcapstone'
+        sh 'eksctl create cluster --name prod --version 1.17 --region us-west-2 --nodegroup-name linux-nodes --node-type t2.small --nodes 3 --nodes-min 1 --nodes-max 4 --ssh-access --ssh-public-key pipeline --managed'
         }
       }
     }
