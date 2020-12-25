@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reactapp-prod
+spec:
+  selector:
+    matchLabels:
+      app: greenreactapp
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: greenreactapp
+    spec:
+      containers:
+        - name: greenreactapp
+          image: abhibhatia/reactapp-image-abcapstoneproject
+          ports:
+            - containerPort: 80

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reactapp-test
+spec:
+  selector:
+    matchLabels:
+      app: bluereactapp
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: bluereactapp
+    spec:
+      containers:
+        - name: bluereactapp
+          image: abhibhatia/reactapp-image-abcapstoneproject
+          ports:
+            - containerPort: 80

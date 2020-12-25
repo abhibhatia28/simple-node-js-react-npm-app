@@ -63,7 +63,18 @@ pipeline {
     stage('Create kube config file') {
       steps{
         withAWS(credentials: 'awscredentials',region: 'us-west-2') {
-          sh 'aws eks update-kubeconfig --name abcaptstone-cluster'
+          sh 'aws eks update-kubeconfig --name abcapstone-cluster'
+        }
+      }
+    }
+    stage('Deploy blue container'){
+      steps {
+        withAWS(credentials: 'awscredentials',region: 'us-west-2') {
+          sh 'kubectl config view'
+          sh 'kubectl config use-context arn:aws:eks:us-west-2:abcapstone-cluster/reactapp-image-abcapstoneproject'
+          sh 'kubectl apply -f bluedeploy.yml'
+          sleep(time:20,unit:"SECONDS")
+          sh 'kubectl apply -f blueservice.json'
         }
       }
     }
