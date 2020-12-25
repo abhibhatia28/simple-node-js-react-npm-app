@@ -13,7 +13,7 @@ pipeline {
     }
     stage('echo path') {
       steps {
-        sh 'echo $PATH'
+        sh 'printev | sort'
       }
     }
     stage('Create kube config file') {
