@@ -4,7 +4,7 @@ pipeline {
     registry = "abhibhatia/reactapp-image-abcapstoneproject"
     registryCredential = 'dockerhub'
     dockerImage = ''
-    PATH = "$PATH;C:/Program Files/Amazon/AWSCLIV2/;"
+    Path = "$PATH;C:/Program Files/Amazon/AWSCLIV2/;"
   }
   stages {
     stage('Cloning Git') {
@@ -12,9 +12,14 @@ pipeline {
         git 'https://github.com/abhibhatia28/simple-node-js-react-npm-app.git'
       }
     }
+    stage('print all env') {
+      steps {
+        sh 'printenv | sort'
+      }
+    }
     stage('echo path') {
       steps {
-        sh 'echo $PATH'
+        sh 'echo $Path'
       }
     }
     stage('Create kube config file') {
