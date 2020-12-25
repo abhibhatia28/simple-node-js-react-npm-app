@@ -4,6 +4,7 @@ pipeline {
     registry = "abhibhatia/reactapp-image-abcapstoneproject"
     registryCredential = 'dockerhub'
     dockerImage = ''
+    Path = "$PATH;C:\Program Files\Amazon\AWSCLIV2\;"
   }
   stages {
     stage('Cloning Git') {
@@ -14,6 +15,7 @@ pipeline {
     stage('echo path') {
       steps {
         sh 'printenv | sort'
+        sh 'echo $Path'
       }
     }
     stage('Create kube config file') {
