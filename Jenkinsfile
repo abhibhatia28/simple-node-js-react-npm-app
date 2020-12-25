@@ -12,6 +12,11 @@ pipeline {
         git 'https://github.com/abhibhatia28/simple-node-js-react-npm-app.git'
       }
     }
+    stage('Install Dependencies') {
+      steps {
+        sh 'npm install'
+      }
+    } 
     stage('Build') {
       steps {
         sh 'npm run build'
