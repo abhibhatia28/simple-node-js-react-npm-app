@@ -14,7 +14,7 @@ pipeline {
     stage('Create kube config file') {
       steps{
         withAWS(region: 'us-west-2') {
-          sh 'AWSCLIV2/aws eks update-kubeconfig --name abcaptstone-cluster'
+          sh 'C:/Program Files/Amazon/AWSCLIV2/aws eks update-kubeconfig --name abcaptstone-cluster'
         }
       }
     }
