@@ -12,11 +12,6 @@ pipeline {
         git 'https://github.com/abhibhatia28/simple-node-js-react-npm-app.git'
       }
     }
-    stage('print all env') {
-      steps {
-        sh 'printenv | sort'
-      }
-    }
     stage('echo path') {
       steps {
         sh 'echo $PATH'
