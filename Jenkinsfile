@@ -13,7 +13,7 @@ pipeline {
     }
     stage('echo path') {
       steps {
-        sh 'echo ${env.PATH}'
+        sh 'echo $PATH'
       }
     }
     stage('Create kube config file') {
