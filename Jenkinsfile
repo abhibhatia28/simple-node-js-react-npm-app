@@ -4,7 +4,7 @@ pipeline {
     registry = "abhibhatia/reactapp-image-abcapstoneproject"
     registryCredential = 'dockerhub'
     dockerImage = ''
-    Path = "$PATH;C:/Program Files/Amazon/AWSCLIV2/;"
+    Path = "$Path;C:/Program Files/Amazon/AWSCLIV2/;"
   }
   stages {
     stage('Cloning Git') {
