@@ -12,7 +12,7 @@ pipeline {
         git 'https://github.com/abhibhatia28/simple-node-js-react-npm-app.git'
       }
     }
-    stage('Cloning Git') {
+    stage('echo path') {
       steps {
         sh 'echo %PATH%'
       }
