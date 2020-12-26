@@ -11,6 +11,13 @@ pipeline {
         git 'https://github.com/abhibhatia28/simple-node-js-react-npm-app.git'
       }
     }
+    stage('Create kube config file') {
+      steps{
+        withAWS(credentials: 'awscredentials',region: 'us-west-2') {
+          sh 'aws eks update-kubeconfig --name abcapstone-cluster'
+        }
+      }
+    }
     stage('Deploy blue container'){
       steps {
         withAWS(credentials: 'awscredentials',region: 'us-west-2') {
