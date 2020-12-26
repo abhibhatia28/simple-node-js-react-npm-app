@@ -24,10 +24,18 @@ pipeline {
           sh '/usr/local/bin/kubectl version --client'
           sh '/usr/local/bin/kubectl config --kubeconfig=/var/jenkins_home/.kube/config view'
           sh 'kubectl config use-context arn:aws:eks:us-west-2:406401063468:cluster/abcaptstone-cluster --kubeconfig=/var/jenkins_home/.kube/config'
-          sh 'kubectl apply -f bluedeploy.yml'
+          sh 'kubectl apply -f bluedeploy.yml --kubeconfig=/var/jenkins_home/.kube/config'
           sleep(time:20,unit:"SECONDS")
-          sh 'kubectl apply -f blueservice.json'
+          sh 'kubectl apply -f blueservice.json --kubeconfig=/var/jenkins_home/.kube/config'
         }
+      }
+    }
+    stage('Approval'){
+      steps {
+        withAWS(region:'us-west-2', credentials:'awscredentials') {
+            sh 'kubectl get service/blue --kubeconfig=/var/jenkins_home/.kube/config'
+            }
+            input "Does the new version looks good?"
       }
     }
   }
