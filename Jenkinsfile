@@ -23,7 +23,6 @@ pipeline {
         withKubeConfig([credentialsId: 'kubectlid']) {
           sh 'cat /var/jenkins_home/.kube/config'
           sh '/usr/local/bin/kubectl version --client --kubeconfig=/var/jenkins_home/.kube/config'
-          sh '/usr/local/bin/kubectl.exe config --kubeconfig=/var/jenkins_home/.kube/config view'
           sh 'kubectl config use-context arn:aws:eks:us-west-2:406401063468:cluster/abcaptstone-cluster'
           sh 'kubectl apply -f bluedeploy.yml'
           sleep(time:20,unit:"SECONDS")
