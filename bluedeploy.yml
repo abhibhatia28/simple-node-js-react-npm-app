@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: bluereactapp
-          image: abhibhatia/reactcapstoneab
+          image: abhibhatia/999hubreactapp1999
           ports:
             - containerPort: 80
