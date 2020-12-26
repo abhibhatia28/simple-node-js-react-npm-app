@@ -26,8 +26,6 @@ pipeline {
           sh 'kubectl cluster-info dump --kubeconfig=/var/jenkins_home/.kube/config'
           sh 'kubectl get pods --kubeconfig=/var/jenkins_home/.kube/config'
           sh 'kubectl config use-context arn:aws:eks:us-west-2:406401063468:cluster/abcaptstone-cluster --kubeconfig=/var/jenkins_home/.kube/config'
-          sh 'kubectl cluster-info --kubeconfig=/var/jenkins_home/.kube/config'
-          sh 'kubectl get pods --kubeconfig=/var/jenkins_home/.kube/config'
           sh 'kubectl apply -f bluedeploy.yml --kubeconfig=/var/jenkins_home/.kube/config'
           sleep(time:20,unit:"SECONDS")
           sh 'kubectl apply -f blueservice.json --kubeconfig=/var/jenkins_home/.kube/config'
