@@ -21,7 +21,6 @@ pipeline {
     stage('Deploy blue container'){
       steps {
         withKubeConfig([credentialsId: 'kubectlid']) {
-          sh 'cat /.kube/config'
           sh 'cat /usr/local/bin/.kube/config'
           sh '/usr/local/bin/kubectl.exe config view'
           sh 'kubectl config use-context arn:aws:eks:abhibhatia@abcapstone-cluster.us-west-2/reactapp-image-abcapstoneproject'
