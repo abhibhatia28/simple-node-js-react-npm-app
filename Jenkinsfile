@@ -12,6 +12,7 @@ pipeline {
       }
     }
     stage('Deploy blue container'){
+      steps {
         withKubeConfig([credentialsId: 'kubectlid']) {
           sh 'cat /var/jenkins_home/.kube/config'
           sh '/usr/local/bin/kubectl version --client --kubeconfig=/var/jenkins_home/.kube/config'
