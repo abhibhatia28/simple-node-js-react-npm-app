@@ -34,9 +34,21 @@ pipeline {
     stage('Approval'){
       steps {
         withAWS(region:'us-west-2', credentials:'awscredentials') {
-            sh 'kubectl get service/blue --kubeconfig=/var/jenkins_home/.kube/config'
-            }
-            input "Does the new version looks good?"
+          sh 'kubectl get service/blue-prod --kubeconfig=/var/jenkins_home/.kube/config'
+        }
+        input "Does the new version looks good?"
+      }
+    }
+    stage('Deploy latest on production cluster') {
+      steps {
+        withAWS(region:'us-west-2', credentials:'awscredentials') {
+          sh 'kubectl get service/blue-prod --kubeconfig=/var/jenkins_home/.kube/config'
+          sh 'kubectl apply -f greendeploy.yml --kubeconfig=/var/jenkins_home/.kube/config'
+          sleep(time:20,unit:"SECONDS")
+          sh 'kubectl apply -f greenservice.json --kubeconfig=/var/jenkins_home/.kube/config'
+          sleep(time:20,unit:"SECONDS")
+          sh 'kubectl get service/blue-prod --kubeconfig=/var/jenkins_home/.kube/config'
+        }
       }
     }
   }
