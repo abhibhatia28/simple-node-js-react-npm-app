@@ -23,7 +23,7 @@ pipeline {
         withKubeConfig([credentialsId: 'kubectlid']) {
           sh '/usr/local/bin/kubectl version --client'
           sh '/usr/local/bin/kubectl config --kubeconfig=/var/jenkins_home/.kube/config view'
-          sh 'kubectl cluster-info --kubeconfig=/var/jenkins_home/.kube/config'
+          sh 'kubectl cluster-info dump --kubeconfig=/var/jenkins_home/.kube/config'
           sh 'kubectl get pods --kubeconfig=/var/jenkins_home/.kube/config'
           sh 'kubectl config use-context arn:aws:eks:us-west-2:406401063468:cluster/abcaptstone-cluster --kubeconfig=/var/jenkins_home/.kube/config'
           sh 'kubectl cluster-info --kubeconfig=/var/jenkins_home/.kube/config'
