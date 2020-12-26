@@ -20,7 +20,7 @@ pipeline {
     }
     stage('Deploy blue container'){
       steps {
-        withAWS(credentials: 'awscredentials',region: 'us-west-2') {
+        withKubeConfig(credentials: 'awscredentials',region: 'us-west-2') {
           sh '/usr/local/bin/kubectl.exe config view'
           sh 'kubectl config use-context arn:aws:eks:us-west-2:abcapstone-cluster/reactapp-image-abcapstoneproject'
           sh 'kubectl apply -f bluedeploy.yml'
