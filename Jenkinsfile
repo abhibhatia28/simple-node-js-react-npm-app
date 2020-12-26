@@ -14,7 +14,7 @@ pipeline {
     stage('Create kube config file') {
       steps{
         withAWS(credentials: 'awscredentials',region: 'us-west-2') {
-          sh 'aws eks update-kubeconfig --name abcapstone-cluster'
+          sh 'aws eks update-kubeconfig --name abreactapp'
         }
       }
     }
