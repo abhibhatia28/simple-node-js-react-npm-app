@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    registry = "abhibhatia/reactapp-image-abcapstoneproject"
+    registry = "abhibhatia/hubreactapp1"
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
