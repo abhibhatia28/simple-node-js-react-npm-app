@@ -31,9 +31,12 @@ spec:
         app: capstone-udacity
     spec:
       containers:
-        - image: abhibhatia/hubreactapp1
+        - image: nginx
           imagePullPolicy: Always
           name: capstone-udacity
+          volumeMounts:
+          - name: shared-data
+          mountPath: /usr/share/nginx/html
           ports:
             - containerPort: 80
   strategy:
