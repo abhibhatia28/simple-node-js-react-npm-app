@@ -36,7 +36,7 @@ spec:
           name: capstone-udacity
           volumeMounts:
           - name: shared-data
-          mountPath: /usr/share/nginx/html
+            mountPath: /usr/share/nginx/html
           ports:
             - containerPort: 80
   strategy:
