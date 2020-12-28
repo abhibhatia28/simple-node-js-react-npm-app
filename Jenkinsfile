@@ -28,7 +28,6 @@ pipeline {
           sh 'kubectl config use-context arn:aws:eks:us-west-2:406401063468:cluster/abcapstone3 --kubeconfig=/var/jenkins_home/.kube/config'
           sh 'kubectl apply -f deploy.yml --kubeconfig=/var/jenkins_home/.kube/config'
           sleep(time:20,unit:"SECONDS")
-          sh 'kubectl apply -f blueservice.json --kubeconfig=/var/jenkins_home/.kube/config'
         }
       }
     }
@@ -38,19 +37,6 @@ pipeline {
           sh 'kubectl get service/capstone-udacity --kubeconfig=/var/jenkins_home/.kube/config'
         }
         input "Does the new version looks good?"
-      }
-    }
-    stage('Deploy latest on production cluster') {
-      steps {
-        withAWS(region:'us-west-2', credentials:'awscredentials') {
-          sh 'kubectl get service/blue-prod --kubeconfig=/var/jenkins_home/.kube/config'
-          sh 'kubectl config use-context arn:aws:eks:us-west-2:406401063468:cluster/abcapstone-cluster --kubeconfig=/var/jenkins_home/.kube/config'
-          sh 'kubectl apply -f greendeploy.yml --kubeconfig=/var/jenkins_home/.kube/config'
-          sleep(time:20,unit:"SECONDS")
-          sh 'kubectl apply -f greenservice.json --kubeconfig=/var/jenkins_home/.kube/config'
-          sleep(time:20,unit:"SECONDS")
-          sh 'kubectl get service/blue-prod --kubeconfig=/var/jenkins_home/.kube/config'
-        }
       }
     }
   }

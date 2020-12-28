@@ -4,7 +4,7 @@ metadata:
   name: capstone-udacity
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: nlb-ip
-  namespace: default
+  namespace: kube-system
   labels:
     app: capstone-udacity
 spec:
@@ -20,7 +20,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: capstone-udacity
-  namespace: default
+  namespace: kube-system
   labels:
     app: capstone-udacity
 spec:
