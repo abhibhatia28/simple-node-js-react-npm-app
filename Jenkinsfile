@@ -14,7 +14,7 @@ pipeline {
     stage('Create kube config file') {
       steps{
         withAWS(credentials: 'awscredentials',region: 'us-west-2') {
-          sh 'aws eks update-kubeconfig --name abcapstone2'
+          sh 'aws eks update-kubeconfig --name abcapstone3'
         }
       }
     }
@@ -25,7 +25,7 @@ pipeline {
           sh '/usr/local/bin/kubectl config --kubeconfig=/var/jenkins_home/.kube/config view'
           sh 'kubectl cluster-info dump --kubeconfig=/var/jenkins_home/.kube/config'
           sh 'kubectl get pods --kubeconfig=/var/jenkins_home/.kube/config'
-          sh 'kubectl config use-context arn:aws:eks:us-west-2:406401063468:cluster/abcapstone2 --kubeconfig=/var/jenkins_home/.kube/config'
+          sh 'kubectl config use-context arn:aws:eks:us-west-2:406401063468:cluster/abcapstone3 --kubeconfig=/var/jenkins_home/.kube/config'
           sh 'kubectl apply -f deploy.yml --kubeconfig=/var/jenkins_home/.kube/config'
           sleep(time:20,unit:"SECONDS")
           sh 'kubectl apply -f blueservice.json --kubeconfig=/var/jenkins_home/.kube/config'
