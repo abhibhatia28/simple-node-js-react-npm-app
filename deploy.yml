@@ -31,7 +31,7 @@ spec:
         app: capstone-udacity
     spec:
       containers:
-        - image: public.ecr.aws/d1i9z8s6/abcapstone:latest
+        - image: public.ecr.aws/d1s6/abcapstone:latest
           imagePullPolicy: Always
           name: capstone-udacity
           ports:
