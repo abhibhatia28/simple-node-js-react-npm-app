@@ -31,7 +31,7 @@ spec:
         app: capstone-udacity
     spec:
       containers:
-        - image: nginx
+        - image: 884552403086.dkr.ecr.us-east-1.amazonaws.com/udacity/udacity-capstone:latest
           imagePullPolicy: Always
           name: capstone-udacity
           ports:
