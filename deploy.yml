@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: capstone-udacity
+  labels:
+    app: capstone-udacity
+spec:
+  type: LoadBalancer
+  selector:
+    app: capstone-udacity
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: capstone-udacity
+  labels:
+    app: capstone-udacity
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: capstone-udacity
+  template:
+    metadata:
+      labels:
+        app: capstone-udacity
+    spec:
+      containers:
+        - image: abhibhatia/hubreactapp1
+          imagePullPolicy: Always
+          name: capstone-udacity
+          ports:
+            - containerPort: 80
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
