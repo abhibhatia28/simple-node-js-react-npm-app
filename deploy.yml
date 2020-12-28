@@ -21,7 +21,7 @@ metadata:
     app: capstone-udacity
   namespace: default
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: capstone-udacity
@@ -31,7 +31,7 @@ spec:
         app: capstone-udacity
     spec:
       containers:
-        - image: public.ecr.aws/d1s6/abcapstone:latest
+        - image: public.ecr.aws/d1i9z8s6/abcapstone:latest
           imagePullPolicy: Always
           name: capstone-udacity
           ports:

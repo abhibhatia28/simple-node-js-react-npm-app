@@ -35,7 +35,7 @@ pipeline {
     stage('Approval'){
       steps {
         withAWS(region:'us-west-2', credentials:'awscredentials') {
-          sh 'kubectl get service/blue-prod --kubeconfig=/var/jenkins_home/.kube/config'
+          sh 'kubectl get service/capstone-udacity --kubeconfig=/var/jenkins_home/.kube/config'
         }
         input "Does the new version looks good?"
       }
