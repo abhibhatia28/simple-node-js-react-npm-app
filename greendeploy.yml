@@ -1,19 +1,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reactapp-prod
+  name: capstone-project-cloud-devops-prod
+  namespace: default
 spec:
+  replicas: 3
   selector:
     matchLabels:
-      app: greenreactapp
-  minReadySeconds: 5
+      app: capstone-project-cloud-devops-green
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        app: greenreactapp
+        app: capstone-project-cloud-devops-green
     spec:
       containers:
-        - name: greenreactapp
-          image: abhibhatia/reactcapstoneab
+        - image: public.ecr.aws/z9d2n7e1/nginx:1.19.5
+          imagePullPolicy: Always
+          name: capstone-project-cloud-devops-green
           ports:
             - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: capstone-project-cloud-devops-prod
+  labels:
+    app: capstone-project-cloud-devops
+spec:
+  type: LoadBalancer
+  selector:
+    app: capstone-project-cloud-devops-green
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30000
+      protocol: TCP
