@@ -92,8 +92,6 @@ pipeline {
       steps {
         withKubeConfig([credentialsId: 'kubectlid']) {
           sh 'kubectl config use-context arn:aws:eks:us-west-2:406401063468:cluster/abcapstone4 --kubeconfig=/var/jenkins_home/.kube/config'
-          sh 'kubectl delete deployment capstone-project-cloud-devops-test'
-          sh 'kubectl delete svc/capstone-project-cloud-devops-test'
           sh 'kubectl apply -f greendeploy.yml --kubeconfig=/var/jenkins_home/.kube/config'
           sleep(time:20,unit:"SECONDS")
           sh 'kubectl get service/capstone-project-cloud-devops-prod --kubeconfig=/var/jenkins_home/.kube/config'
