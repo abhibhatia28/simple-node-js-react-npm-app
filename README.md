@@ -1,14 +1,11 @@
-# simple-node-js-react-npm-app
-
-This repository is for the
-[Build a Node.js and React app with npm](https://jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/)
-tutorial in the [Jenkins User Documentation](https://jenkins.io/doc/).
-
 The repository contains a simple Node.js and React application which generates
-a web page with the content "Welcome to React" and is accompanied by a test to
+a web page with the content "Welcome to nginx" and is accompanied by a test to
 check that the application renders satisfactorily.
 
-The `jenkins` directory contains an example of the `Jenkinsfile` (i.e. Pipeline)
-you'll be creating yourself during the tutorial and the `scripts` subdirectory
-contains shell scripts with commands that are executed when Jenkins processes
-the "Test" and "Deliver" stages of your Pipeline.
+I am using Jenkins to Install dependencies, build, lint and finally create a docker image
+
+I am using a eks blue/green deployment deployment time
+
+I built my own Kubernetes cluster using eksctl create cluster command
+
+I further enhanced the Jenkins pipeline to deploy image in the newly created cluster and wait for user confirmation to validate if deployment is looking good in Blue before it is moved to Green.
