@@ -11,4 +11,4 @@ eksctl create cluster \
 --nodes-max 4 \
 --managed
 
-eksctl get cluster --name=abcapstone4
+eksctl get cluster --name=abcapstone5
